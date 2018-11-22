@@ -1,25 +1,29 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, TextInput } from 'react-native';
 import styled from 'styled-components';
-import FlexImage from 'react-native-flex-image';
 
 import ListEventImage from 'saw/src/components/ListEvent/ListEventImage/ListEventImage';
 import ListEventDescription from 'saw/src/components/ListEvent/ListEventDescription/ListEventDescription';
 
-const StyledView = styled.View`
+const ListEvents = styled.View`
   flex: 1;
   flex-direction: row;
   align-items: center;
 `;
 
+const Filter = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+`;
 
 export default class ListEvent extends React.Component {
   render() {
     return (
-      <StyledView>
+      <ListEvents>
         <ListEventImage eventImage={this.props.event.eventImages[0].imageSrc}></ListEventImage>
         <ListEventDescription event={this.props.event}></ListEventDescription>
-      </StyledView>
+      </ListEvents>
     );
   }
 }
