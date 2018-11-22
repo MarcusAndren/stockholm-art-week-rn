@@ -65,7 +65,7 @@ export default class CalendarScreen extends React.Component {
       response.sort(function(a, b) {
         a = new Date(a.startDate);
         b = new Date(b.startDate);
-        return a>b ? -1 : a<b ? 1 : 0;
+        return a > b ? 1 : a < b ? -1 : 0;
       });
       
       this.setState({
