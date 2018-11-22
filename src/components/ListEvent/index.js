@@ -1,22 +1,24 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import styled from 'styled-components';
-import AutoHeightImage from 'react-native-auto-height-image';
+import FlexImage from 'react-native-flex-image';
 
+import ListEventImage from 'saw/src/components/ListEvent/ListEventImage/ListEventImage';
+import ListEventDescription from 'saw/src/components/ListEvent/ListEventDescription/ListEventDescription';
 
 const StyledView = styled.View`
-  background-color: #000;
-  flex: 0.5;
-  margin: 10px;
-  height: 200px;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
 `;
+
 
 export default class ListEvent extends React.Component {
   render() {
-    console.log(this.props.event.eventImages);
     return (
       <StyledView>
-        <AutoHeightImage height={100} source={{uri: this.props.event.eventImages[0].imageSrc}}></AutoHeightImage>
+        <ListEventImage eventImage={this.props.event.eventImages[0].imageSrc}></ListEventImage>
+        <ListEventDescription event={this.props.event}></ListEventDescription>
       </StyledView>
     );
   }

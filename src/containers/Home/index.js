@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const StyledView = styled.View`
   background-color: #FF2D4A;
   flex: 1;
-  padding: 200px 20px 0;
+  padding: 200px 30px 0;
 `;
 
 const StyledImage = styled.Image`

@@ -1628,6 +1628,11 @@ chownr@^1.1.1:
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.1.1.tgz#54726b8b8fff4df053c42187e801fb4412df1494"
   integrity sha512-j38EvO5+LHX84jlo6h4UzmOwi0UgW61WRyPtJz4qaadK5eY3BTS5TY/S1Stc3Uk2lIM6TPevAlULiEJwie860g==
 
+class-autobind@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/class-autobind/-/class-autobind-0.1.4.tgz#34516c49167cf8d3f639ddc186bcfa2268afff34"
+  integrity sha1-NFFsSRZ8+NP2Od3Bhrz6Imiv/zQ=
+
 class-utils@^0.3.5:
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/class-utils/-/class-utils-0.3.6.tgz#f93369ae8b9a7ce02fd41faad0ca83033190c463"
@@ -4367,23 +4372,17 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-native-android-image-polyfill@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-android-image-polyfill/-/react-native-android-image-polyfill-1.0.0.tgz#f0b61bac0c6a91b8f8f81233ab1998613adf64ac"
-  integrity sha1-8LYbrAxqkbj4+BIzqxmYYTrfZKw=
-
-react-native-auto-height-image@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/react-native-auto-height-image/-/react-native-auto-height-image-1.0.5.tgz#97ae79854cf39171c80f165a5a6514da4364419e"
-  integrity sha512-BsLeLUcQUOL5q1UR3/XBlaCnJY7F6Tv4CflwjwsVgFBmL5qtIQFXlqI4T/+4hVpqo4kB7zPsqkhUxHe50JG9Yg==
-  dependencies:
-    prop-types "^15.5.8"
-    react-native-android-image-polyfill "^1.0.0"
-
 react-native-branch@2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.2.5.tgz#4074dd63b4973e6397d9ce50e97b57c77a518e9d"
   integrity sha1-QHTdY7SXPmOX2c5Q6XtXx3pRjp0=
+
+react-native-flex-image@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-flex-image/-/react-native-flex-image-1.2.0.tgz#cf674818619eca68b138ffaa0edaab7b9cf1809a"
+  integrity sha512-g5hiHgwDRnlMXCm0yfyeGHvj1HC98SlrHUuF57ZihNOH2ZglE2cD6HLijGeTbpeeQDhQc7Krrm25IT/LbabLyQ==
+  dependencies:
+    class-autobind "^0.1.4"
 
 react-native-gesture-handler@1.0.9, react-native-gesture-handler@^1.0.0:
   version "1.0.9"

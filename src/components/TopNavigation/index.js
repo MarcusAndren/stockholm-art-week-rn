@@ -7,7 +7,7 @@ import TopLink from 'saw/src/components/TopNavigation/TopLink';
 const StyledView = styled.View`
   position: absolute;
   z-index: 1000;
-  top: 50px;
+  top: 75px;
   left: 30px;
   flex: 1;
   flex-direction: row;
