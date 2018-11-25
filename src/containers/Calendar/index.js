@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Text, Picker } from 'react-native';
+import { ScrollView, View, Text, Picker, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 
 import ListEvent from 'saw/src/components/ListEvent';
@@ -78,6 +78,8 @@ export default class CalendarScreen extends React.Component {
   }
 
   render() {
+    const navigation = this.props.navigation;
+
     const onScroll = (event) => {
       const paddingToBottom = 50;
       const bottom = event.nativeEvent.layoutMeasurement.height + event.nativeEvent.contentOffset.y >= event.nativeEvent.contentSize.height - paddingToBottom;
@@ -126,7 +128,7 @@ export default class CalendarScreen extends React.Component {
               return index < this.state.noOfEvents;
             })
             .map((event) => {
-              return <ListEvent key={event.id} event={event}></ListEvent>;
+              return <ListEvent navigation={navigation} key={event.id} event={event}></ListEvent>;
             })
         }
         </View>

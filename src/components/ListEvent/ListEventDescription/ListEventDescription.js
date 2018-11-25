@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import styled from 'styled-components';
-import moment from 'moment';
+
+import { formatDate } from 'saw/src/util/date';
 
 const Wrapper = styled.View`
   flex: 1;
@@ -41,15 +42,6 @@ const DateText = styled.Text`
 `;
 
 export default class ListEvent extends React.Component {
-  formatDate(startDate, endDate) {
-    const start = startDate ? moment(startDate).format('MMMM DD') : '';
-    const end = endDate ? moment(endDate).format('MMMM DD') : '';
-
-    return start
-      + (start && end && start !== end ? ' - ' : '')
-      + (start !== end ? end : '');
-  }
-
   render() {
     return (
       <Wrapper>
@@ -59,7 +51,7 @@ export default class ListEvent extends React.Component {
         <TextWrapper>
           <Venue>{this.props.event.venue}</Venue>
           <Address>{this.props.event.address}</Address>
-          <DateText>{this.formatDate(this.props.event.startDate, this.props.event.endDate)}</DateText>
+          <DateText>{formatDate(this.props.event.startDate, this.props.event.endDate)}</DateText>
         </TextWrapper>
       </Wrapper>
     );
