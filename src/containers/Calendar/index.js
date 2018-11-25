@@ -32,7 +32,7 @@ const FilterInput = styled.TextInput`
   flex: 0.75;
   height: 40px;
   padding: 0 10px;
-  margin: 0 5px 0 30px;
+  margin: 0 5px 0 10px;
 `;
 
 const FilterPicker = styled.View`
@@ -42,7 +42,7 @@ const FilterPicker = styled.View`
   height: 40px;
   align-items: center;
   justify-content: center;
-  margin: 0 30px 0 5px;
+  margin: 0 10px 0 5px;
 `;
 
 export default class CalendarScreen extends React.Component {

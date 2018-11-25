@@ -8,7 +8,7 @@ const StyledView = styled.View`
   position: absolute;
   z-index: 1000;
   top: 75px;
-  left: 30px;
+  left: 10px;
   flex: 1;
   flex-direction: row;
 `;
