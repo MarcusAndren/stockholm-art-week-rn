@@ -36,7 +36,6 @@ const Link = styled.Text`
 export default class EventScreen extends React.Component {
 
   openLink(url) {
-    console.log(url);
     if(!url) {
       return;
     }
@@ -51,8 +50,6 @@ export default class EventScreen extends React.Component {
 
   render() {
     const event = this.props.navigation.state.params;
-    console.log(event);
-
 
     return (
       <EventWrapper>

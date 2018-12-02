@@ -1,9 +1,11 @@
 import React from 'react';
 import { ScrollView, View, Text, Picker, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 import ListEvent from 'saw/src/components/ListEvent';
 import { EventsApi } from 'saw/src/apis';
+import { getEvents, updateFilter, showMoreEvents, setFilteredEvents } from 'saw/src/redux/actions';
 
 const LoadingView = styled.View`
   background-color: #FFF;
@@ -45,36 +47,25 @@ const FilterPicker = styled.View`
   margin: 0 10px 0 5px;
 `;
 
-export default class CalendarScreen extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      isLoading: true,
-      items: [
-        {label: "Today", value: 1},
-        {label: "Tomorrow", value: 2}
-      ],
-      text: ''
-    }
+const mapStateToProps = (state) => ({
+    events: state.events,
+    eventFilter: state.eventFilter
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    getEvents: () => dispatch(getEvents()),
+    showMoreEvents: () => dispatch(showMoreEvents()),
+    updateFilter: (text) => dispatch(updateFilter(text)),
+    setFilteredEvents: (filteredEvents) => dispatch(setFilteredEvents(filteredEvents))
+});
+
+class CalendarScreen extends React.Component {
+  state = {
+    filterText: ''
   }
 
-  componentDidMount(){
-    const eventsApi = new EventsApi();
-
-    eventsApi.getEvents().then((response) => {
-      response.sort(function(a, b) {
-        a = new Date(a.startDate);
-        b = new Date(b.startDate);
-        return a > b ? 1 : a < b ? -1 : 0;
-      });
-      
-      this.setState({
-        isLoading: false,
-        events: response,
-        filteredEvents: response,
-        noOfEvents: 10
-      });
-    });
+  componentDidMount() {
+    this.props.getEvents();
   }
 
   render() {
@@ -83,24 +74,25 @@ export default class CalendarScreen extends React.Component {
     const onScroll = (event) => {
       const paddingToBottom = 50;
       const bottom = event.nativeEvent.layoutMeasurement.height + event.nativeEvent.contentOffset.y >= event.nativeEvent.contentSize.height - paddingToBottom;
-      if (bottom && this.state.filteredEvents.length >= this.state.noOfEvents+5) {
-        const noOfEvents = this.state.noOfEvents+5;
-        this.setState({noOfEvents: noOfEvents});
+      if (bottom && this.props.events.filteredEvents.length >= this.props.eventFilter.noOfEvents+5) {
+        this.props.showMoreEvents();
       }
     }
 
     const onFilterUpdate = (text) => {
       text = text.toLowerCase();
-      const filteredEvents = this.state.events.filter((event) => {
+      const filteredEvents = this.props.events.events.filter((event) => {
         return (event.address && event.address.toLowerCase().indexOf(text) >= 0)
           || (event.venue && event.venue.toLowerCase().indexOf(text) >= 0)
           || (event.title && event.title.toLowerCase().indexOf(text) >= 0);
       });
 
-      this.setState({text: text, filteredEvents: filteredEvents});
+      this.props.updateFilter(text);
+      this.setState({filterText: text});
+      //this.props.setFilteredEvents(filteredEvents);
     }
 
-    if(this.state.isLoading) {
+    if(this.props.events.isLoading) {
       return (
         <LoadingView>
           <Text>Calendar</Text>
@@ -115,7 +107,7 @@ export default class CalendarScreen extends React.Component {
         <Filter>
           <FilterInput
             onChangeText={onFilterUpdate}
-            value={this.state.text}
+            value={this.state.filterText}
           />
           <FilterPicker>
             <Text>Today</Text>
@@ -123,9 +115,9 @@ export default class CalendarScreen extends React.Component {
         </Filter>
         <View>
         {
-          this.state.filteredEvents
+          this.props.events.filteredEvents
             .filter((event, index) => {
-              return index < this.state.noOfEvents;
+              return index < this.props.eventFilter.noOfEvents;
             })
             .map((event) => {
               return <ListEvent navigation={navigation} key={event.id} event={event}></ListEvent>;
@@ -136,3 +128,5 @@ export default class CalendarScreen extends React.Component {
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(CalendarScreen);
