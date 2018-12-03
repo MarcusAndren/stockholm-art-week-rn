@@ -1,11 +1,13 @@
 import React from 'react';
-import { ScrollView, View, Text, Picker, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, Picker, TouchableOpacity, ActivityIndicator } from 'react-native';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import RNPickerSelect from 'react-native-picker-select';
 
 import ListEvent from 'saw/src/components/ListEvent';
 import { EventsApi } from 'saw/src/apis';
-import { getEvents, updateFilter, showMoreEvents, setFilteredEvents } from 'saw/src/redux/actions';
+import { weekdayInBetweenDates } from 'saw/src/util/date';
+import { getEvents, updateFilter, showMoreEvents, setFilteredEvents, selectDay } from 'saw/src/redux/actions';
 
 const LoadingView = styled.View`
   background-color: #FFF;
@@ -28,19 +30,18 @@ const Filter = styled.View`
 `;
 
 const FilterInput = styled.TextInput`
-  border-color: #000;
-  border-width: 1px;
+  border-bottom-color: #000;
+  border-bottom-width: 1px;
   font-size: 16px;
-  flex: 0.75;
+  flex: 0.5;
   height: 40px;
-  padding: 0 10px;
   margin: 0 5px 0 10px;
 `;
 
 const FilterPicker = styled.View`
-  flex: 0.25;
-  border-color: #000;
-  border-width: 1px;
+  flex: 0.5;
+  border-bottom-color: #000;
+  border-bottom-width: 1px;
   height: 40px;
   align-items: center;
   justify-content: center;
@@ -56,17 +57,26 @@ const mapDispatchToProps = (dispatch) => ({
   getEvents: () => dispatch(getEvents()),
   showMoreEvents: () => dispatch(showMoreEvents()),
   updateFilter: (text) => dispatch(updateFilter(text)),
-  setFilteredEvents: (filteredEvents) => dispatch(setFilteredEvents(filteredEvents))
+  setFilteredEvents: (filteredEvents) => dispatch(setFilteredEvents(filteredEvents)),
+  selectDay: (day) => dispatch(selectDay(day))
 });
 
 class EventsScreen extends React.Component {
-  state = {
-    filter: ''
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      filter: '',
+      day: ''
+    }
+
+    this.pickerRef = null;
   }
 
   componentDidMount() {
     this.props.getEvents();
     this.setState({filter: this.props.eventFilter.filter});
+    console.log(this.props.eventFilter.days);
   }
 
   render() {
@@ -95,10 +105,23 @@ class EventsScreen extends React.Component {
       this.props.setFilteredEvents(filteredEvents);
     }
 
+    const onSelectDay = (day) => {
+      console.log(day);
+      this.props.selectDay(day);
+
+      const filteredEvents = this.props.events.events.filter((event) => {
+        const x = weekdayInBetweenDates(day, event.startDate, event.endDate);
+        console.log(x);
+        return x;
+      });
+
+      this.props.setFilteredEvents(filteredEvents);
+    }
+
     if(this.props.events.isLoading) {
       return (
         <LoadingView>
-          <Text>Calendar</Text>
+          <ActivityIndicator size="small" color="black" />
         </LoadingView>
       ); 
     }
@@ -111,9 +134,22 @@ class EventsScreen extends React.Component {
           <FilterInput
             onChangeText={onFilterUpdate}
             value={this.state.filter}
+            placeholder="Search..."
+            placeholderTextColor="#000000"
           />
           <FilterPicker>
-            <Text>Today</Text>
+            <RNPickerSelect
+              placeholder={{
+                label: 'Filter events by day',
+                value: null
+              }}
+              items={this.props.eventFilter.days}
+              onValueChange={onSelectDay}
+              value={this.props.eventFilter.day}
+              ref={(el) => {
+                this.pickerRef = el;
+              }}
+            /> 
           </FilterPicker>
         </Filter>
         <View>

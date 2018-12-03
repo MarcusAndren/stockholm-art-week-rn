@@ -33,3 +33,7 @@ export const updateFilter = (filter) => {
 export const showMoreEvents = () => {
   return {type: 'SHOW_MORE_EVENTS'};
 };
+
+export const selectDay = (day) => {
+  return {type: 'SELECT_DAY', day: day};
+};

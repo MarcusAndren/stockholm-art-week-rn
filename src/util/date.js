@@ -8,3 +8,24 @@ export function formatDate(startDate, endDate) {
     + (start && end && start !== end ? ' - ' : '')
     + (start !== end ? end : '');
 }
+
+export function weekdayInBetweenDates(weekday, startDate, endDate) {
+  const start = startDate ? moment(startDate) : '';
+  const end = endDate ? moment(endDate) : '';
+
+  if(start !== '' && end !== '') {
+    if(start.diff(end, 'days') >= 7) {
+      return true;
+    }
+  console.log('-----');
+  console.log(weekday + '-' + start.format('d') + '-' + end.format('d'));
+  console.log('-----');
+
+    const startInt = parseInt(start.format('d'), 10);
+    const endInt = parseInt(end.format('d'), 10);
+
+    return startInt > endInt ? startInt >= weekday || weekday <= endInt : startInt >= weekday && weekday <= endInt;
+  } else {
+    return start !== '' ? parseInt(start, 10) === weekday : (end !== '' ? parseInt(end, 10) === weekday : false);
+  }
+}
