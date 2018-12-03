@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, Linking } from 'react-native';
+import { View, Text, Linking, Dimensions } from 'react-native';
 import styled from 'styled-components';
-import FlexImage from 'react-native-flex-image';
+import FitImage from 'react-native-fit-image';
 
 import { formatDate } from 'saw/src/util/date';
 
@@ -13,8 +13,11 @@ const EventWrapper = styled.ScrollView`
 `;
 
 const ImageWrapper = styled.View`
-  height: 300px;
-  flex: 0.5;
+  display: flex;
+  flex-direction: row;
+  alignItems: left;
+  justify-content: center;
+  padding: 0 0 15px;
 `;
 
 const Back = styled.Text`
@@ -65,7 +68,9 @@ export default class EventScreen extends React.Component {
     return (
       <EventWrapper>
         <View><Back onPress={() => this.props.navigation.goBack(null)}>Back</Back></View>
-        <ImageWrapper><FlexImage source={{uri: event.eventImages[0].imageSrc}}></FlexImage></ImageWrapper>
+        <ImageWrapper>
+          <FitImage resizeMode="contain" style={{height: 300, width: Dimensions.get('window').width}} source={{uri: event.eventImages[0].imageSrc}}></FitImage>
+        </ImageWrapper>
         <Title>{event.title}</Title>
         <Description>{event.description}</Description>
         <Title><Text>Details</Text></Title>
