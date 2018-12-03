@@ -48,15 +48,15 @@ const FilterPicker = styled.View`
 `;
 
 const mapStateToProps = (state) => ({
-    events: state.events,
-    eventFilter: state.eventFilter
+  events: state.events,
+  eventFilter: state.eventFilter
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    getEvents: () => dispatch(getEvents()),
-    showMoreEvents: () => dispatch(showMoreEvents()),
-    updateFilter: (text) => dispatch(updateFilter(text)),
-    setFilteredEvents: (filteredEvents) => dispatch(setFilteredEvents(filteredEvents))
+  getEvents: () => dispatch(getEvents()),
+  showMoreEvents: () => dispatch(showMoreEvents()),
+  updateFilter: (text) => dispatch(updateFilter(text)),
+  setFilteredEvents: (filteredEvents) => dispatch(setFilteredEvents(filteredEvents))
 });
 
 class CalendarScreen extends React.Component {

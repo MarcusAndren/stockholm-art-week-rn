@@ -2,9 +2,11 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import styled from 'styled-components';
 import { MapView } from 'expo';
+import { connect } from 'react-redux';
 
 import { EventsApi } from 'saw/src/apis';
 import { formatDate } from 'saw/src/util/date';
+import { getEvents } from 'saw/src/redux/actions';
 
 const StyledView = styled.View`
   background-color: #FFF;
@@ -12,34 +14,49 @@ const StyledView = styled.View`
   padding: 200px 20px 0;
 `;
 
-export default class MapScreen extends React.Component {
+const mapStateToProps = (state) => ({
+  events: state.events
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getEvents: () => dispatch(getEvents())
+});
+
+class MapScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+
     this.mapRef = null;
-    }
+  }
 
   componentDidMount() {
-    const eventsApi = new EventsApi();
+    this.props.getEvents();
+    this.fitMap();
+  }
 
-    eventsApi.getEvents().then((response) => {
-      this.setState({
-        events: response
-      });
+  componentDidUpdate() {
+    this.fitMap();
+  }
 
-      const eventIds = response.filter((event) => event.lat && event.lng).map((event) => (event.id+''));
-      console.log(eventIds);
-      this.mapRef.fitToSuppliedMarkers(
-        eventIds,
-        {
-          animated: true
-        }
-      );
-    });
+  fitMap() {
+    if(this.props.events.isLoading || this.props.events.events.length === 0) {
+      return;
+    }
+
+    const eventIds = this.props.events.events
+      .filter((event) => event.lat && event.lng)
+      .map((event) => (event.id+''));
+
+    this.mapRef.fitToSuppliedMarkers(
+      eventIds,
+      {
+        animated: true
+      }
+    );
   }
 
   render() {
-    let events = this.state.events || [];
+    let events = this.props.events.events || [];
 
     return (
       <MapView
@@ -79,3 +96,5 @@ export default class MapScreen extends React.Component {
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(MapScreen);
