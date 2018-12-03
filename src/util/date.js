@@ -10,6 +10,10 @@ export function formatDate(startDate, endDate) {
 }
 
 export function weekdayInBetweenDates(weekday, startDate, endDate) {
+  if(weekday === -1 || weekday === null) {
+    return true;
+  }
+
   const start = startDate ? moment(startDate) : '';
   const end = endDate ? moment(endDate) : '';
 

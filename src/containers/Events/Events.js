@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Text, Picker, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { ScrollView, View, Text, Picker, TouchableOpacity, ActivityIndicator, StyleSheet } from 'react-native';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import RNPickerSelect from 'react-native-picker-select';
@@ -43,7 +43,6 @@ const FilterPicker = styled.View`
   border-bottom-color: #000;
   border-bottom-width: 1px;
   height: 40px;
-  align-items: center;
   justify-content: center;
   margin: 0 10px 0 5px;
 `;
@@ -150,6 +149,8 @@ class EventsScreen extends React.Component {
               ref={(el) => {
                 this.pickerRef = el;
               }}
+              placeholderTextColor="#000000"
+              style={{ ...pickerSelectStyles }}
             /> 
           </FilterPicker>
         </Filter>
@@ -168,5 +169,26 @@ class EventsScreen extends React.Component {
     );
   }
 }
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+      fontSize: 16,
+      paddingTop: 12,
+      paddingBottom: 12,
+      color: 'black',
+  },
+  icon: {
+    borderLeftWidth: 0,
+    borderLeftColor: 'transparent',
+    borderTopWidth: 2,
+    borderTopColor: 'black',
+    borderRightWidth: 2,
+    borderRightColor: 'black',
+    width: 9,
+    height: 9,
+    right: 15,
+    top: 5,
+    transform: [{ translateY: 8 }, { rotate: '135deg' }],
+}
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventsScreen);
