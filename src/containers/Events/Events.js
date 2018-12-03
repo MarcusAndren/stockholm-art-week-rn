@@ -75,7 +75,28 @@ class EventsScreen extends React.Component {
   componentDidMount() {
     this.props.getEvents();
     this.setState({filter: this.props.eventFilter.filter});
-    console.log(this.props.eventFilter.days);
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.eventFilter.filter !== this.props.eventFilter.filter || prevProps.eventFilter.day !== this.props.eventFilter.day) {
+      this.filterEvents();
+    }
+  }
+
+  filterEvents() {
+    const day = this.props.eventFilter.day;
+    console.log(day);
+
+    const text = (' ' + this.props.eventFilter.filter).slice(1).toLowerCase();
+
+    const filteredEvents = this.props.events.events.filter((event) => {
+      return weekdayInBetweenDates(day, event.startDate, event.endDate)
+        && ((event.address && event.address.toLowerCase().indexOf(text) >= 0)
+        || (event.venue && event.venue.toLowerCase().indexOf(text) >= 0)
+        || (event.title && event.title.toLowerCase().indexOf(text) >= 0));
+    });
+
+    this.props.setFilteredEvents(filteredEvents);
   }
 
   render() {
@@ -92,30 +113,10 @@ class EventsScreen extends React.Component {
     const onFilterUpdate = (text) => {
       this.setState({filter: text});
       this.props.updateFilter(text);
-
-      text = (' ' + text).slice(1).toLowerCase();
-
-      const filteredEvents = this.props.events.events.filter((event) => {
-        return (event.address && event.address.toLowerCase().indexOf(text) >= 0)
-          || (event.venue && event.venue.toLowerCase().indexOf(text) >= 0)
-          || (event.title && event.title.toLowerCase().indexOf(text) >= 0);
-      });
-
-      this.props.setFilteredEvents(filteredEvents);
     }
 
     const onSelectDay = (day) => {
-      console.log(day);
       this.props.selectDay(day);
-
-      const filteredEvents = this.props.events.events.filter((event) => {
-        console.log(event);
-        const x = weekdayInBetweenDates(day, event.startDate, event.endDate);
-        console.log(x);
-        return x;
-      });
-
-      this.props.setFilteredEvents(filteredEvents);
     }
 
     if(this.props.events.isLoading) {

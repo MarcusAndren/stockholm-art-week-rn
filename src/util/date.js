@@ -21,9 +21,6 @@ export function weekdayInBetweenDates(weekday, startDate, endDate) {
     if(start.diff(end, 'days') >= 7) {
       return true;
     }
-  console.log('-----');
-  console.log(weekday + '-' + start.format('d') + '-' + end.format('d'));
-  console.log('-----');
 
     const startInt = parseInt(start.format('d'), 10);
     const endInt = parseInt(end.format('d'), 10);
