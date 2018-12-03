@@ -172,10 +172,10 @@ class EventsScreen extends React.Component {
 }
 const pickerSelectStyles = StyleSheet.create({
   inputIOS: {
-      fontSize: 16,
-      paddingTop: 12,
-      paddingBottom: 12,
-      color: 'black',
+    fontSize: 16,
+    paddingTop: 12,
+    paddingBottom: 12,
+    color: 'black',
   },
   icon: {
     borderLeftWidth: 0,
