@@ -14,6 +14,11 @@ const StyledView = styled.View`
   padding: 200px 20px 0;
 `;
 
+const Link = styled.Text`
+  color: #768db0;
+  z-index: 9999;
+`;
+
 const mapStateToProps = (state) => ({
   events: state.events
 });
@@ -82,12 +87,15 @@ class MapScreen extends React.Component {
                 }}
                 title={event.title}
                 description={event.description}
+                onCalloutPress={() => this.props.navigation.navigate('Event', event)}
+
               >
                 <MapView.Callout>
                   <Text>{event.title}</Text>
                   <Text>{event.venue}</Text>
                   <Text>{event.address}</Text>
                   <Text>{formatDate(event.startDate, event.endDate)}</Text>
+                  <Link>More information</Link>
                 </MapView.Callout>
               </MapView.Marker>
             ))
