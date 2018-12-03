@@ -3,7 +3,6 @@ const initialState = {
   filter: ''
 }
 export const eventFilter = (state = initialState, action) => {
-  console.log(action.type);
   switch(action.type) {
     case 'GET_FILTER':
       return state;

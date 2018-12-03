@@ -12,6 +12,17 @@ const EventWrapper = styled.ScrollView`
   padding: 0 10px 100px;
 `;
 
+const ImageWrapper = styled.View`
+  height: 300px;
+  flex: 0.5;
+`;
+
+const Back = styled.Text`
+  font-size: 16px;
+  padding: 0 0 20px;
+  color: #768db0;
+`;
+
 const Title = styled.Text`
   font-size: 24px;
   font-weight: bold;
@@ -53,7 +64,8 @@ export default class EventScreen extends React.Component {
 
     return (
       <EventWrapper>
-        <FlexImage source={{uri: event.eventImages[0].imageSrc}}></FlexImage>
+        <View><Back onPress={() => this.props.navigation.goBack(null)}>Back</Back></View>
+        <ImageWrapper><FlexImage source={{uri: event.eventImages[0].imageSrc}}></FlexImage></ImageWrapper>
         <Title>{event.title}</Title>
         <Description>{event.description}</Description>
         <Title><Text>Details</Text></Title>
