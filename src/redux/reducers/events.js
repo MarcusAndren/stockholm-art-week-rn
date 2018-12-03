@@ -7,8 +7,10 @@ const initalState = {
 
 export const events = (state = initalState, action) => {
   switch(action.type) {
+    case 'GET_EVENTS':
+      return state;
     case 'GET_EVENTS_START':
-      return Object.assign({}, state, { isLoading: true});
+      return Object.assign({}, state, { error: null, isLoading: true});
     case 'GET_EVENTS_SUCCESS':
       return Object.assign({}, state, { events: action.payload, filteredEvents: action.payload, isLoading: false});
     case 'GET_EVENTS_FAILURE':

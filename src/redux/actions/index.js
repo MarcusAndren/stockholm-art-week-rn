@@ -3,7 +3,14 @@ import { EventsApi } from 'saw/src/apis';
 const eventsApi = new EventsApi();
 
 export const getEvents = (x) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const state = getState();
+
+    if(state.events.events.length && !state.events.error && !state.events.isLoading) {
+      dispatch({type: 'GET_EVENTS'});
+      return;
+    }
+
     dispatch({type: 'GET_EVENTS_START'});
 
     eventsApi.getEvents()
@@ -20,10 +27,7 @@ export const setFilteredEvents = (events) => {
 }
 
 export const updateFilter = (filter) => {
-  return (dispatch) => {
-    console.log("asd")
-    dispatch({type: 'UPDATE_FILTER'})
-  };
+  return {type: 'UPDATE_FILTER', filter: filter};
 };
 
 export const showMoreEvents = () => {

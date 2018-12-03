@@ -61,11 +61,12 @@ const mapDispatchToProps = (dispatch) => ({
 
 class CalendarScreen extends React.Component {
   state = {
-    filterText: ''
+    filter: ''
   }
 
   componentDidMount() {
     this.props.getEvents();
+    this.setState({filter: this.props.eventFilter.filter});
   }
 
   render() {
@@ -80,16 +81,18 @@ class CalendarScreen extends React.Component {
     }
 
     const onFilterUpdate = (text) => {
-      text = text.toLowerCase();
+      this.setState({filter: text});
+      this.props.updateFilter(text);
+
+      text = (' ' + text).slice(1).toLowerCase();
+
       const filteredEvents = this.props.events.events.filter((event) => {
         return (event.address && event.address.toLowerCase().indexOf(text) >= 0)
           || (event.venue && event.venue.toLowerCase().indexOf(text) >= 0)
           || (event.title && event.title.toLowerCase().indexOf(text) >= 0);
       });
 
-      this.props.updateFilter(text);
-      this.setState({filterText: text});
-      //this.props.setFilteredEvents(filteredEvents);
+      this.props.setFilteredEvents(filteredEvents);
     }
 
     if(this.props.events.isLoading) {
@@ -107,7 +110,7 @@ class CalendarScreen extends React.Component {
         <Filter>
           <FilterInput
             onChangeText={onFilterUpdate}
-            value={this.state.filterText}
+            value={this.state.filter}
           />
           <FilterPicker>
             <Text>Today</Text>
