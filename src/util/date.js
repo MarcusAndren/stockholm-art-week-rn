@@ -23,8 +23,7 @@ export function weekdayInBetweenDates(weekday, startDate, endDate) {
 
     const startInt = parseInt(start.format('d'), 10);
     const endInt = parseInt(end.format('d'), 10);
-
-    return startInt > endInt ? startInt >= weekday || weekday <= endInt : startInt >= weekday && weekday <= endInt;
+    return startInt > endInt ? weekday >= startInt || weekday <= endInt : weekday >= startInt && weekday <= endInt;
   } else {
     return start !== '' ? parseInt(start, 10) === weekday : (end !== '' ? parseInt(end, 10) === weekday : false);
   }

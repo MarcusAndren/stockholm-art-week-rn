@@ -110,6 +110,7 @@ class EventsScreen extends React.Component {
       this.props.selectDay(day);
 
       const filteredEvents = this.props.events.events.filter((event) => {
+        console.log(event);
         const x = weekdayInBetweenDates(day, event.startDate, event.endDate);
         console.log(x);
         return x;
