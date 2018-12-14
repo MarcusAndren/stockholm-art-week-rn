@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Image, ScrollView, Dimensions, Text, Linking } from 'react-native';
 import styled from 'styled-components';
+import FitImage from 'react-native-fit-image';
 
 const MainWrapper = styled.ScrollView`
   display: flex;
@@ -10,17 +11,12 @@ const MainWrapper = styled.ScrollView`
 const ImageWrapper = styled.View`
   background-color: #FF2D4A;
   display: flex;
-  padding: 200px 10px 0;
+  padding: 0 10px 0;
 `;
 
 const AboutWrapper = styled.View`
   background-color: #FFF;
   display: flex;
-`;
-
-const StyledImage = styled.Image`
-  width: 284px;
-  height: 267px;
 `;
 
 const Header = styled.Text`
@@ -64,7 +60,7 @@ export default class HomeScreen extends React.Component {
     return (
       <MainWrapper>
         <ImageWrapper style={{height: Dimensions.get('window').height}}>
-          <StyledImage source={require('saw/assets/logo.png')}></StyledImage>
+          <FitImage resizeMode="contain" style={{borderRadius: 10}} source={require('saw/assets/logo.png')}></FitImage>
         </ImageWrapper>
 
         <AboutWrapper>
