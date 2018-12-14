@@ -39,9 +39,9 @@ const FilterInput = styled.TextInput`
 `;
 
 const FilterPicker = styled.View`
-  flex: 0.5;
   border-bottom-color: #000;
   border-bottom-width: 1px;
+  flex: 0.5;
   height: 40px;
   justify-content: center;
   margin: 0 10px 0 5px;
@@ -189,7 +189,10 @@ const pickerSelectStyles = StyleSheet.create({
     right: 15,
     top: 5,
     transform: [{ translateY: 8 }, { rotate: '135deg' }],
-}
+  },
+  underline: {
+    borderTopColor: 'transparent'
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventsScreen);

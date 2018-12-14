@@ -15,7 +15,6 @@ const EventWrapper = styled.ScrollView`
 const ImageWrapper = styled.View`
   display: flex;
   flex-direction: row;
-  alignItems: left;
   justify-content: center;
   padding: 0 0 15px;
 `;
