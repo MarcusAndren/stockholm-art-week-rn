@@ -85,7 +85,6 @@ class EventsScreen extends React.Component {
 
   filterEvents() {
     const day = this.props.eventFilter.day;
-    console.log(day);
 
     const text = (' ' + this.props.eventFilter.filter).slice(1).toLowerCase();
 
