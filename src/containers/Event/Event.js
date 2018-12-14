@@ -76,8 +76,8 @@ export default class EventScreen extends React.Component {
         <Detail>{formatDate(event.startDate, event.endDate)}</Detail>
         <Detail>{event.venue}</Detail>
         <Detail>{event.address}</Detail>
-        { event.website ? (<Link onPress={this.openLink(event.website)}>{event.website}</Link>) : null }
-        { event.facebook ? (<Link onPress={this.openLink(event.facebook)}>{event.facebook}</Link>) : null }
+        { event.website ? (<Link onPress={() => this.openLink(event.website)}>{event.website}</Link>) : null }
+        { event.facebook ? (<Link onPress={() => this.openLink(event.facebook)}>{event.facebook}</Link>) : null }
       </EventWrapper>
     );
   }

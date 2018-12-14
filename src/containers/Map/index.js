@@ -36,7 +36,10 @@ class MapScreen extends React.Component {
 
   componentDidMount() {
     this.props.getEvents();
-    this.fitMap();
+
+    setTimeout(() => {
+      this.fitMap();
+    }, 1000);
   }
 
   componentDidUpdate() {
