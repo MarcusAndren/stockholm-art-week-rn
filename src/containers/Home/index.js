@@ -27,6 +27,7 @@ const Header = styled.Text`
 
 const Information = styled.Text`
   padding: 20px 10px 0;
+  font-size: 18px;
 `;
 
 const LinkWrapper = styled.View`

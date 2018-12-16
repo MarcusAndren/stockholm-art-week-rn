@@ -6,15 +6,11 @@ import ListEventImage from 'saw/src/components/ListEvent/ListEventImage/ListEven
 import ListEventDescription from 'saw/src/components/ListEvent/ListEventDescription/ListEventDescription';
 
 const EventWrapper = styled.TouchableOpacity`
-  flex: 1;
-  flex-direction: row;
+  display: flex;
+  width: 50%;
+  flex-direction: column;
   align-items: center;
-`;
-
-const Filter = styled.View`
-  flex: 1;
-  flex-direction: row;
-  justify-content: space-between;
+  padding: 15px;
 `;
 
 export default class ListEvent extends React.Component {

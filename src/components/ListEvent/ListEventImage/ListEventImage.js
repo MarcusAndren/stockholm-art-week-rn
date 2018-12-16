@@ -1,7 +1,7 @@
 import React from 'react';
-import { View,ActivityIndicator } from 'react-native';
+import { View,ActivityIndicator, Dimensions } from 'react-native';
 import styled from 'styled-components';
-import FlexImage from 'react-native-flex-image';
+import FitImage from 'react-native-fit-image';
 
 const StyledView = styled.View`
   flex: 1;
@@ -20,13 +20,7 @@ export default class ListEventImage extends React.Component {
   render() {
     return (
       <StyledView>
-        <FlexImage
-          source={{uri: this.props.eventImage}}
-          loadingComponent={
-            <LoadingView>
-              <ActivityIndicator size="small" color="#cccccc" />
-            </LoadingView>
-          }></FlexImage>
+        <FitImage resizeMode="contain" style={{height: 200, width: (Dimensions.get('window').width / 2) - 30}} source={{uri: this.props.eventImage}}></FitImage>
       </StyledView>
     );
   }

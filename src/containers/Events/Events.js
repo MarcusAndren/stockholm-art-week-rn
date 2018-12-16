@@ -23,6 +23,12 @@ const MainScrollView = styled.ScrollView`
   flex-direction: column;
 `;
 
+const EventWrapper = styled.View`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
 const Filter = styled.View`
   display: flex;
   flex-direction: row;
@@ -154,7 +160,7 @@ class EventsScreen extends React.Component {
             /> 
           </FilterPicker>
         </Filter>
-        <View>
+        <EventWrapper>
         {
           this.props.events.filteredEvents
             .filter((event, index) => {
@@ -164,7 +170,7 @@ class EventsScreen extends React.Component {
               return <ListEvent navigation={navigation} key={event.id} event={event}></ListEvent>;
             })
         }
-        </View>
+        </EventWrapper>
       </MainScrollView>
     );
   }
