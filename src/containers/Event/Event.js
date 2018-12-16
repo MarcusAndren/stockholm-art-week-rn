@@ -8,7 +8,7 @@ import { formatDate } from 'saw/src/util/date';
 const EventWrapper = styled.ScrollView`
   flex: 1;
   flex-direction: column;
-  margin: 150px 0 0;
+  margin: 150px 0 50px;
   padding: 0 10px 100px;
 `;
 
@@ -43,7 +43,8 @@ const Detail = styled.Text`
 
 const Link = styled.Text`
   font-size: 16px;
-  padding: 0 0 50px;
+  padding: 0 0 5px;
+  text-decoration-line: underline;
 `;
 
 export default class EventScreen extends React.Component {
@@ -54,6 +55,10 @@ export default class EventScreen extends React.Component {
     }
     Linking.canOpenURL(url).then(supported => {
       if (supported) {
+        if(url.indexOf('http:') === -1 || url.indexOf('https:') === -1) {
+          url = 'https://' + url;
+        }
+
         Linking.openURL(url);
       } else {
         console.log('Don\'t know how to open URI: ' + url);

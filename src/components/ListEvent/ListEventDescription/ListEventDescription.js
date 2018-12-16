@@ -16,25 +16,26 @@ const TextWrapper = styled.View`
 `;
 
 const Header = styled.Text`
+  font-size: 14px
   font-weight: bold;
-  padding: 0 0 15px;
+  padding: 0 0 10px;
 `;
 
 const Venue = styled.Text`
   padding: 2px 0 0;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
 `;
 
 const Address = styled.Text`
   padding: 2px 0 0;
-  font-size: 12px;
+  font-size: 14px;
   color: #111;
 `;
 
 const DateText = styled.Text`
-  padding: 8px 0 0;
-  font-size: 12px;
+  padding: 10px 0 0;
+  font-size: 14px;
 `;
 
 export default class ListEvent extends React.Component {
